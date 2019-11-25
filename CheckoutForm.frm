@@ -2,7 +2,7 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CheckoutForm 
    Caption         =   "Checkout Form"
    ClientHeight    =   6255
-   ClientLeft      =   105
+   ClientLeft      =   110
    ClientTop       =   450
    ClientWidth     =   7560
    OleObjectBlob   =   "CheckoutForm.frx":0000
@@ -28,19 +28,23 @@ Dim AfterHours As Boolean
 
 AfterHours = False
 
+' Get current time and day of week
 Hr = Hour(Now)
 TDay = WeekDay(Now, vbSunday)
 
+' If not a weekday or if not between 9-6
 If TDay = 1 Or TDay > 6 Or Hr < 9 Or Hr > 17 Then
 AfterHours = True
 End If
 
 If AfterHours Then
+' Update After Hours Cell
 Count = Sheets(Sheets.Count).Cells(11, 7).Value
 Sheets(Sheets.Count).Cells(11, 7).Value = Count + 1
 Else
-Count = Sheets(Sheets.Count).Cells(Hr - 9, TDay).Value
-Sheets(Sheets.Count).Cells(Hr - 9, TDay).Value = Count + 1
+' Update weekday, time Cell
+Count = Sheets(Sheets.Count).Cells(Hr - 7, TDay).Value
+Sheets(Sheets.Count).Cells(Hr - 7, TDay).Value = Count + 1
 End If
 
 End Sub
