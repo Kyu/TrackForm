@@ -301,7 +301,9 @@ End Sub
 
 Private Sub Search_Button_Click()
 
-' Worksheets(1).Activate
+' Search only in first worksheet "Student Checkout"
+Worksheets(1).Activate
+
 ' Search query is the content of the WSU ID Box
 Query = WSUID_TextBox.Text
 
@@ -412,6 +414,8 @@ Private Sub WSUID_TextBox_Change()
 ' Updating is allowed after Search is clicked
 
 update = Not (WSUID_TextBox.Text <> selected_ID)
+' If Warning is active when ID Box changes,
+' Warning Label is still displayed when user ID changes, and that's okay
     
 End Sub
 

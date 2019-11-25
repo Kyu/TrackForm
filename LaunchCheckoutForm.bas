@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module1"
+Attribute VB_Name = "LaunchCheckoutForm"
 Sub Launch_Checkout_Form()
-CheckoutForm.Show
+Call CheckoutForm.Show(vbModeless)
 End Sub
