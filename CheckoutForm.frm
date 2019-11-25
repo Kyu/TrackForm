@@ -20,6 +20,31 @@ Dim update As Boolean
 Dim warn_food As Boolean
 Dim warn_other As Boolean
 
+Sub After_Checkout()
+Dim Hr As Integer
+Dim TDay As Integer
+Dim Count As Integer
+Dim AfterHours As Boolean
+
+AfterHours = False
+
+Hr = Hour(Now)
+TDay = WeekDay(Now, vbSunday)
+
+If TDay = 1 Or TDay > 6 Or Hr < 9 Or Hr > 17 Then
+AfterHours = True
+End If
+
+If AfterHours Then
+Count = Sheets(Sheets.Count).Cells(11, 7).Value
+Sheets(Sheets.Count).Cells(11, 7).Value = Count + 1
+Else
+Count = Sheets(Sheets.Count).Cells(Hr - 9, TDay).Value
+Sheets(Sheets.Count).Cells(Hr - 9, TDay).Value = Count + 1
+End If
+
+End Sub
+
 Function Total_Food() As Integer
 
 ' Current food
@@ -404,6 +429,7 @@ If update Then
     OtherU_Label.Caption = ""
     
     Call Display_Current_Stats
+    Call After_Checkout
 End If
 
 End Sub
